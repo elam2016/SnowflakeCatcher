@@ -1,3 +1,4 @@
+float screenSize = 300;
 void setup()
 {
   //your code here
@@ -13,10 +14,12 @@ void mouseDragged()
 
 class Snowflake
 {
-  //class member variable declarations
+  int x, y;
+  boolean isMoving;//class member variable declarations
   Snowflake()
   {
-    //class member variable initializations
+    x = (int)(Math.random()*screenSize);
+    y = (int)(Math.random()*screenSize);
   }
   void show()
   {
