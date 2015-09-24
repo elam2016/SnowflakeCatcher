@@ -20,6 +20,7 @@ class Snowflake
   {
     x = (int)(Math.random()*screenSize);
     y = (int)(Math.random()*screenSize);
+    isMoving = true;
   }
   void show()
   {
@@ -27,20 +28,21 @@ class Snowflake
   }
   void lookDown()
   {
-    //your code here
+    if(y < screenSize && y > 0)
+
   }
   void erase()
   {
-    //your code here
+    fill(0);
+    ellipse(x, y, 7, 7);
   }
   void move()
   {
-    //your code here
+    if(isMoving)
+      y++;
   }
   void wrap()
   {
     //your code here
   }
 }
-
-
