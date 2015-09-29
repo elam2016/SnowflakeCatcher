@@ -1,4 +1,4 @@
-int screenSize = 300;
+int screenSize = 400;
 Snowflake [] flakes = new Snowflake[screenSize/15];
 void setup()
 {
@@ -27,22 +27,23 @@ void mouseClicked()
 
 class Snowflake
 {
-  int x, y;
+  float flakeX, flakeY, flakeSize;
   boolean isMoving;
   Snowflake()
   {
-    x = (int)(Math.random()*screenSize);
-    y = (int)(Math.random()*screenSize);
+    flakeX = ((int)(Math.random()*screenSize));
+    flakeY = ((int)(Math.random()*screenSize));
+    flakeSize = (int)(Math.random()*3 + 3);
     isMoving = true;
   }
   void show()
   {
     fill(255);
-    ellipse(x, y, 5, 5);
+    ellipse(flakeX, flakeY, flakeSize, flakeSize);
   }
   void lookDown()
   {
-    if(y < screenSize && y > 0 && get(x,y) != color(0, 0, 0))
+    if(flakeY < screenSize && flakeY > 0 && get((int)flakeX,(int)flakeY) != color(0, 0, 0))
       isMoving = false;
     else
       isMoving = true;
@@ -50,17 +51,17 @@ class Snowflake
   void erase()
   {
     fill(0);
-    ellipse(x, y, 7, 7);
+    ellipse(flakeX, flakeY, flakeSize, flakeSize);
   }
   void move()
   {
     if(isMoving)
-      y++;
+      flakeY++;
   }
   void wrap()
   {
-    if(y > screenSize + 1)
-      y = 0;
-      x = (int)(Math.random()*screenSize);
+    if(flakeY > screenSize + 1)
+      flakeY = 0;
+      flakeX = (int)(Math.random()*screenSize);
   }
 }
