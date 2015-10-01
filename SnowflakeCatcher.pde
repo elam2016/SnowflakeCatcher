@@ -1,28 +1,40 @@
 int screenSize = 400;
-Snowflake [] flakes = new Snowflake[screenSize/15];
+Snowflake [] flakes = new Snowflake[screenSize/10];
+boolean catchFlakes = false;
+color black = color(0, 0, 0);
 void setup()
 {
-  size(screenSize, screenSize);
+  background(0);
+  size(screenSize, screenSize*2);
   for(int f = 0; f < flakes.length; f++)
     flakes[f] = new Snowflake();
 }
 void draw()
 {
-  background(0);
-  frameRate(10);
+  //frameRate(10);
   for(int i = 0; i < flakes.length; i++)
   {
+    stroke(0, 0, 0);
     flakes[i].erase();
     flakes[i].lookDown();
     flakes[i].move();
     flakes[i].wrap();
     flakes[i].show();
   }
+  if(catchFlakes)
+  {
+    fill(197);
+    noStroke();
+    rect(mouseX, mouseY, 20, 5);
+  }
 }
-void mouseClicked()
+void mousePressed()
 {
-  fill(197);
-  rect(mouseX, mouseY, 5, 1);
+  catchFlakes = true;
+}
+void mouseReleased()
+{
+  catchFlakes = false;
 }
 
 class Snowflake
@@ -32,7 +44,7 @@ class Snowflake
   Snowflake()
   {
     flakeX = ((int)(Math.random()*screenSize));
-    flakeY = ((int)(Math.random()*screenSize));
+    flakeY = ((int)(Math.random()*screenSize/2));
     flakeSize = (int)(Math.random()*3 + 3);
     isMoving = true;
   }
@@ -43,7 +55,8 @@ class Snowflake
   }
   void lookDown()
   {
-    if(flakeY < screenSize && flakeY > 0 && get((int)flakeX,(int)flakeY) != color(0, 0, 0))
+    int downward = get((int)flakeX, (int)flakeY + 1);
+    if(flakeY < screenSize/2 && flakeY > 0 &&  downward != black)
       isMoving = false;
     else
       isMoving = true;
@@ -60,7 +73,7 @@ class Snowflake
   }
   void wrap()
   {
-    if(flakeY > screenSize + 1)
+    if(flakeY > screenSize*2 + 1)
       flakeY = 0;
       flakeX = (int)(Math.random()*screenSize);
   }
