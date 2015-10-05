@@ -15,7 +15,6 @@ void setup()
 void draw()
 {
   background(0);
-  frameRate(10);
   for(int c = 0; c < catchFlakes.length; c++)
   {
     if(catchFlakes[c]!=null)
